@@ -2,17 +2,17 @@ import java.util.Scanner;
 
 public class VendingM {
     private String name;
-    private int price; 
+    private double price; 
     private int stock;
 
-    public VendingM(String name, int price, int stock) {
+    public VendingM(String name, double price, int stock) {
         this.name = name;
         this.price = price;
         this.stock = stock;
     }
 
     public String getName() { return name; }
-    public int getPrice() { return price; }
+    public double getPrice() { return price; }
     public int getStock() { return stock; }
 
     public boolean purchase(int qty) {
@@ -24,11 +24,11 @@ public class VendingM {
     public static void main(String[] args) {
         
         VendingM[] items = new VendingM[] {
-            new VendingM("Potato Chips", 150, 10),
-            new VendingM("Chocolate Bar", 125, 8),
-            new VendingM("Granola Bar", 100, 5),
-            new VendingM("Soda Can", 175, 12),
-            new VendingM("Cookie Pack", 130, 6)
+            new VendingM("Potato Chips", 1.50, 10),
+            new VendingM("Chocolate Bar", 1.25, 8),
+            new VendingM("Granola Bar", 1.00, 5),
+            new VendingM("Soda Can", 1.75, 12),
+            new VendingM("Cookie Pack", 1.30, 6)
         };
 
         Scanner in = new Scanner(System.in);
@@ -37,7 +37,32 @@ public class VendingM {
         System.out.println("Usage instructions: Enter the item number to select a snack, then the quantity. Enter 0 to exit.");
         System.out.println();
 
-    
+        for (int i = 0; i < items.length; i++) {
+            System.out.println(String.format("%s: %s -- $%.2f", i + 1, items[i].getName(), items[i].getPrice()));
+        }
+
+        System.out.print("Enter item number: ");
+        int choice = in.nextInt();
+
+        if (choice >= 1 && choice <= items.length) {
+            VendingM selectedItem = items[choice - 1];
+
+            int inserted = 0;
+
+            while (inserted < selectedItem.getPrice()) {
+                System.out.print("Insert $1 bill (enter 1): ");
+                int bill = in.nextInt();
+
+                if (bill == 1) {
+                    inserted++;
+                } else {
+                    System.out.println("Only $1 bills are accepted.");
+                }
+            }
+
+            System.out.println("Purchase complete!");
+        } else {
+            System.out.println("Invalid selection.");
         }
     }
-
+}
