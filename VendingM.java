@@ -109,7 +109,10 @@ public class VendingM {
             }
 
             System.out.println();
-            System.out.printf("Purchase complete — you got %d x %s!\n", qty, selectedItem.getName());
+            System.out.printf("Purchase complete - you got %d x %s!\n", qty, selectedItem.getName());
+            if (insertedAmount > total) {
+                System.out.printf("Your change is $%.2f\n", insertedAmount - total);
+            }
             System.out.printf("Nice choice — %s is a crowd favorite. Enjoy every bite and have an awesome day!\n", selectedItem.getName());
             System.out.println("Thanks for stopping by our vending machine. Come again soon!");
 
